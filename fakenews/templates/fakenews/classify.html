@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fake News Detector</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'fakenews/js/js.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fakenews/index.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+   <style type="text/css">
+ 
+   	body{
+	
+	font-family:'Raleway';
+font-size: 25px;
+
+
+}
+#results{
+    text-align: center;
+    margin-top: 60px;
+}
+#results li{
+    color: black;
+    margin-top: 10px;
+     line-height: 1.8;
+}
+
+#result1{
+
+    text-align: center;
+    font-size: 40px;
+    
+}
+   </style>
+   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+<body>
+     <div id="wholeupper"><a href="/"><img src= "{% static  'fakenews/trump.png' %}" width="60px" height="75px"></a>
+    <nav id="bar">
+        <li id="page2"><a href="/">Home</a></li>
+        
+    
+   
+
+    </nav>
+    </div>
+
+<div id="results">
+<strong id="result1">{{ result }}</strong>
+<br>
+
+<ul>
+
+    <li style="font-size:30px;"><strong>{{ articletitle }}</strong> </li><br>
+    <img src="{{ articleimage }}">
+    <li> {{ articletext }} </li><br>
+</ul>
+</div>
+    
+</body>
+</html>

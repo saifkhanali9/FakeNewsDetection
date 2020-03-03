@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block title %}<title>Fake News Detector</title>{% endblock %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'fakenews/js/js.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fakenews/index.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+      <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style>
+#button1 {
+  background-color: #A075B9;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 20px;
+  margin: 4px 2px;
+  margin-top: 20px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  font-family:'Raleway';
+  cursor: pointer;
+  width: 150px;
+}
+#button1:hover{opacity: 1;}
+#danger{
+margin-top: 50px;
+font-size: 25px;
+font-family: 'Raleway';
+color:#b94a48;
+background-color:#f2dede;
+ 
+}
+
+ 
+</style>
+</head>
+
+<body>
+  <div id="wholeupper"><a href="/"><img src= "{% static  'fakenews/trump.png' %}" width="60px" height="75px"></a>
+    <nav id="bar">
+        <li id="page2"><a href="/">Home</a></li>
+         </nav>
+    </div>
+
+        
+  {% block content %}
+
+{% if form.errors %}
+<div id="danger">
+<p>Your <strong> username and password</strong> didn't match. Please try again.</p>
+</div>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+<div id="loginform">
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div>
+  <h3>Username</h3>
+  <input required type="text"  name="username"><br> 
+</div>
+<div>
+  <h3>Password</h3>
+  <input required type="password" name="password">
+</div>
+
+
+<div>
+  <input id="button1" type="submit" value="Login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p style="color:black"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+</div>
+{% endblock %}
+</body>
+</html>

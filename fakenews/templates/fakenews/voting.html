@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>Fake News Detector</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'fakenews/js/js.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fakenews/index.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+
+   <style>
+		 table{
+			       padding:20px;
+    tab-size: 100px;
+    font-size: 17px;
+    font-family: 'Raleway';
+    border-style:double;
+		margin-top: 50px;
+		 }
+		 th{
+			 text-align: justify;
+		 }
+		 </style>
+    </head>
+<body>
+    
+    <div id="wholeupper"><a href="/"><img src= "{% static  'fakenews/trump.png' %}" width="60px" height="75px"></a>
+    <nav id="bar">
+        <li id="page2"><a href="/">Home</a></li>
+        {% if user.is_authenticated %}
+        <li> {{ user.get_username }}</li>
+        <li id="page1"><a href="/logout">Logout</a></li>   
+        {% endif %}
+    
+
+    </nav>
+    </div>
+
+
+
+	<meta charset="UTF-8">
+	<title>Fake News Detection</title>
+</head>
+	<body>
+	 <table style="width:100%">
+	  <tr>
+	    <th>Article</th>
+			<th>Vote</th>
+	    <th>Result</th>
+	    <th>Rating</th>
+	  </tr>
+	 {% for o in urls %}
+	  <tr>
+	    <td><a href="{{ o.Url }}" target="_blank">{{o.Title}}</a></td>
+			<td>
+				<button onclick="handleupvote({{o.id}})" type="button" >
+					<i data-id="{{o.id}}" class="far fa-thumbs-up"></i>
+				</button> 
+				<button onclick="handledownvote({{o.id}})">
+					<i data-id="{{o.id}}" class="far fa-thumbs-down"></i>
+				</button> 
+	    <td>{{o.Classification}}</td>
+		<td><img src="{{o.imgurl}}" alt="img"></td>
+	    <td id="{{o.id}}">{% widthratio o.Rating 1 100 %}%</td>
+
+	  </tr>
+	 {% endfor %}
+	</table>
+	
+</body>
+  <script>
+      
+      function handleupvote(s){
+      	$.ajax({
+	      url: '/ajax/upvote',
+	      data: {id: JSON.stringify(s)},
+	      dataType: 'json',
+	      success: function (data) {
+	      	$('#'+s).html((data*100).toFixed(0)+'%')
+	      }
+	    });
+      }
+      function handledownvote(s){
+      	$.ajax({
+	      url: '/ajax/downvote',
+	      data: {id: JSON.stringify(s)},
+	      dataType: 'json',
+	      success: function (data) {
+	      	// temp1 = JSON.parse(data)[0].fields.Likes
+	      	// temp2 = JSON.parse(data)[0].fields.Disikes
+	      	$('#'+s).html((data*100).toFixed(0)+'%')
+			// if(temp1!=0 || temp2 !=0){
+			// 	temp3=Number(temp1)+Number(temp2)
+			// 	console.log(temp3)
+	  //     		$('#'+s).html(temp3)
+	      	// }
+	      }
+	    });
+      }
+
+  </script>
+
+</html>

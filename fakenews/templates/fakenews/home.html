@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE>
+
+<html>
+<head>
+<style>
+button {
+  background-color: #A075B9;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-top: 20px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  font-family:'Raleway';
+  cursor: pointer;
+}
+    
+
+button:hover {opacity: 1}
+</style>
+    <title>Fake News Detector</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'fakenews/trump.png' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'fakenews/js/js.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fakenews/index.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+   
+    </head>
+<body>
+    
+    <div id="wholeupper"><img src= "{% static  'fakenews/trump.png' %}" width="60px" height="75px"></a>
+    <nav id="bar">
+        
+        <li id="page2"><a href="#">Home</a></li>
+        {% if user.is_authenticated %}
+        <li> {{ user.get_username }}</li>
+        <li id="page1"><a href="/logout">Logout</a></li>
+        <li id="page1"><a href="/voting">Votings</a></li>
+        {% else %}
+        <li id="page1"><a href="/accounts/login">Login</a></li>
+        <li id="page3"><a href="/signup">SignUp</a></li>    
+        {% endif %}
+    
+
+    </nav>
+    </div>
+
+    
+    <div id="Webpages"> 
+    
+        <h3 id="url">URL</h3><br>
+        <div id="URL">
+        <form action="/classifyurl" method="POST">{% csrf_token %}
+            <h3>Please Enter Article URL</h3>
+            <input type="url" name="newsurl" required><br>
+            <button type="submit">Analyze</button><br>
+        </form>
+        </div>
+            <h3 id="manual">Manual Entry</h3>
+        <div id="Manual">
+            <form action="/classify" method="POST"> {% csrf_token %}
+        <h3>Please Enter Title of News Article Below</h3>
+        <input type="text"  name="title" required><br>
+        <h3>Please Enter News Article Below</h3>
+        <input type="text"  name="article" required><br>
+        <button type="submit">Analyze</button>
+            </form>
+        </div>
+    
+    
+    
+    
+    </div>
+    
+       <div id="login">
+    
+    <form>
+        <h3>Username</h3>
+        <input type="text" name="username"><br>
+        <h3>Password</h3>
+        <input type="password" name="password"><br>
+        <button type="submit">Login</button> 
+           
+           </form>
+    
+    
+    </div>
+
+     <div id="Signup">
+    
+    <form>
+        <h3>Username</h3>
+        <input type="text" name="username"><br>
+        <h3>Password</h3>
+        <input type="password" name="password"><br>
+        <button type="submit">Signup</button> 
+    </form>
+    
+    </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,76 @@
+h1{
+
+margin: 10px;
+font-family:'amiko';
+font-size: 40px;
+    width: 500px;
+
+
+}
+#bar{
+    list-style: none;
+    top: 0;
+    right: 0;
+    float: right;
+    margin-top: -50px;
+    margin-right: 50px;
+
+
+
+}
+
+#wholeupper{
+
+
+    margin: -10px;
+    padding: 10px;
+}
+a{
+
+    text-decoration: none;
+    color: black;
+
+}
+li{
+font-family:'amiko';
+       font-size: 20px;
+    display: inline;
+ text-align: center;
+    padding: 10px;
+
+
+
+}
+#webpages{
+    
+    font-family: 'amiko';
+
+    text-align: center;
+    margin-top:100px;
+    
+    }
+#webpages h2{
+    font-size:30px;
+}
+#webpages input{
+    padding:20px;
+    tab-size: 100px;
+    font-size: 20px;
+    font-family: 'amiko';
+    border-style:double;
+    
+    
+}
+h3{
+font-size: 25px;
+
+
+}
+#signup{
+    text-align: center;
+    padding:20px;
+    tab-size: 100px;
+    font-size: 20px;
+    font-family: 'amiko';
+    border-style:double;
+}
